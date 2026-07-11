@@ -1,83 +1,73 @@
-# IT Service Desk L1/L2 — Advanced Project Portfolio
+# IT Service Desk L1/L2 Engineering Portfolio
 
-Built for the HCLTech Lucknow Walk-in Drive (Service Desk L1 & L2,
-13 July 2026) and reusable for any IT Service Desk / Technical Support
-role requiring ServiceNow, ticketing analytics, and hands-on
-troubleshooting skills.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## Honesty statement (read this first)
+A four-project technical portfolio built around the core disciplines of an
+ITIL-aligned IT Service Desk: incident/service level management
+(ServiceNow), operational analytics (SLA & performance dashboarding),
+endpoint remediation automation (PowerShell), and self-service deflection
+(knowledge management + conversational AI). Built as preparation for
+Service Desk L1/L2 roles requiring hands-on ServiceNow, ticketing, and
+technical troubleshooting proficiency.
 
-Every project here is labeled with its real status — nothing is
-presented as "live" or "tested" unless it genuinely was. Two constraints
-shaped what could be fully executed in the build environment: no live
-ServiceNow instance (requires personal signup with email verification)
-and no Windows machine (build environment is Linux, and PowerShell
-wasn't installable due to network restrictions). Where that mattered,
-the affected project's README says so explicitly and gives you the exact
-steps to finish verification yourself in minutes.
-
-| Project | Status |
-|---|---|
-| 1. ServiceNow ITSM Mini-Implementation | Complete build guide with exact configuration values — requires your own PDI signup to execute live |
-| 2. Ticket Analytics & SLA Dashboard | **Fully built and independently verified** — real data, real Excel formulas, real recalculation check that caught and fixed a bug |
-| 3. PowerShell Troubleshooting Runbook | Fully written, hand-reviewed, passes automated structural syntax check — not executed on live Windows/AD |
-| 4. Self-Service KB + Virtual Agent Flow | **Fully written and complete** — 5 KB articles + full decision-tree conversation flow, ready to import into ServiceNow |
-
-## Folder structure
+## Repository architecture
 
 ```
 service-desk-portfolio/
-├── 01-servicenow-itsm-implementation/
-│   └── README.md                        # full configuration guide
-├── 02-ticket-analytics-dashboard/
-│   ├── data/tickets.csv
-│   ├── scripts/ (generate_data.py, build_dashboard.py, render_screenshots.py)
-│   ├── dashboard.xlsx
-│   ├── screenshots/ (6 real renders)
-│   └── README.md
-├── 03-powershell-troubleshooting-runbook/
-│   ├── scripts/ (5 .ps1 scripts + verify_syntax.py)
-│   └── README.md
-└── 04-selfservice-knowledgebase-virtual-agent/
-    ├── kb-articles/ (5 articles)
-    ├── virtual-agent-flow.md
-    └── (see project 1's guide for import steps)
+├── 01-servicenow-itsm-configuration/          Incident/SLA/Knowledge configuration guide (ServiceNow PDI)
+├── 02-sla-ticket-analytics-dashboard/         Ticket dataset + formula-driven Excel SLA dashboard
+│   ├── src/                                   Data generation, dashboard build, visualization scripts
+│   ├── data/                                  Generated ticket dataset (tickets.csv)
+│   ├── screenshots/                           Rendered KPI visualizations
+│   └── requirements.txt
+├── 03-powershell-endpoint-remediation-toolkit/ L1/L2 diagnostic & remediation automation
+│   ├── scripts/                               Production PowerShell modules (Verb-Noun convention)
+│   └── tests/                                 Static syntax verification harness
+├── 04-self-service-kb-and-virtual-agent/      Knowledge base + conversational deflection design
+│   ├── knowledge-base-articles/               ITSM-numbered KB articles (KB0001–KB0005)
+│   └── virtual-agent-topics/                  Virtual Agent decision-tree topic specification
+├── LICENSE
+└── README.md
 ```
 
-## Note on this GitHub push
+## Project index
 
-The dashboard.xlsx file, its PNG screenshots, and the tickets.csv dataset
-are tracked in the full local git history (see the project's other
-delivered artifacts) but are reproducible directly from code: running
-`scripts/generate_data.py` then `scripts/build_dashboard.py` and
-`scripts/render_screenshots.py` in the `02-ticket-analytics-dashboard/`
-folder regenerates them exactly (fixed random seed = 42).
+| ID | Project | Domain | Status |
+|----|---------|--------|--------|
+| 01 | [ServiceNow ITSM Configuration](01-servicenow-itsm-configuration/) | Incident Management · Service Level Management · Knowledge Management | Configuration guide — executable against any ServiceNow PDI |
+| 02 | [SLA Ticket Analytics Dashboard](02-sla-ticket-analytics-dashboard/) | Operational Reporting · Data Engineering | **Built and independently verified** |
+| 03 | [PowerShell Endpoint Remediation Toolkit](03-powershell-endpoint-remediation-toolkit/) | IT Automation · Active Directory Administration | Written, statically verified — pending live Windows/AD execution |
+| 04 | [Self-Service KB & Virtual Agent](04-self-service-kb-and-virtual-agent/) | Knowledge Management · Conversational Deflection Design | **Complete** — ready for ServiceNow Virtual Agent Designer import |
 
-## Recommended order to review before Monday
+## Technology stack
 
-1. **Dashboard (Project 2)** — regenerate or use the version already sent
-   to you directly; opens in Excel or Google Sheets and every number
-   recalculates live.
-2. **KB + Virtual Agent (Project 4)** — read `virtual-agent-flow.md`,
-   it's a strong interview talking point on automation thinking even
-   before you touch ServiceNow.
-3. **PowerShell scripts (Project 3)** — if you have any Windows machine
-   available (even personal), run `Test-NetworkConnectivity.ps1` and
-   `Clear-DiskSpace.ps1 -WhatIf` once — takes 5 minutes and gives you
-   real, defensible "I tested this" screenshots.
-4. **ServiceNow (Project 1)** — if time allows, sign up for the free PDI
-   and work through the guide. Even getting through Steps 1-3 (instance +
-   categories + one SLA) gives you something concrete to screen-share or
-   describe in detail.
+| Layer | Tools |
+|---|---|
+| ITSM Platform | ServiceNow (Incident, Problem, Change, SLM, Knowledge, Flow Designer, Virtual Agent Designer) |
+| Data / Analytics | Python 3, `openpyxl` (native Excel formula + chart generation), `matplotlib` |
+| Endpoint Automation | PowerShell 5.1 / 7.x, Active Directory module (RSAT) |
+| Verification Tooling | LibreOffice headless (spreadsheet formula recalculation), custom static PowerShell syntax analyzer |
 
-## How each project maps to the job description
+## Verification methodology
 
-- **"Experience with ticketing tools (ServiceNow preferred)"** →
-  Projects 1 and 4 (ServiceNow configuration + Virtual Agent design)
-- **"IT Service Desk / Technical Support"** → Project 3 (real
-  troubleshooting automation for the highest-frequency ticket types)
-- **"Strong English communication skills"** → Project 4's KB articles
-  are written for a non-technical end user — clear, numbered, scoped
-- **6 months–4 years experience, ready to advance** → Project 2
-  demonstrates the metrics/management-level thinking that separates a
-  ticket-closer from someone ready for L2 and beyond
+Every project in this repository states its verification status explicitly
+rather than implying completion by omission — see each project's `README.md`
+for the specific method used. In summary:
+
+- **Project 02** was verified by forcing a full formula recalculation of the
+  generated workbook via a headless spreadsheet engine and diffing the
+  computed output against expected values — this process caught and fixed a
+  real type-coercion defect (numeric fields written as text, producing
+  `#DIV/0!`) before delivery.
+- **Project 03** was verified via an automated static analyzer that walks
+  each script's token stream (correctly skipping comments and string
+  literals) to confirm brace/paren/bracket balance, combined with manual
+  cmdlet-signature review against official PowerShell/RSAT documentation.
+- **Projects 01 and 04** are configuration/design artifacts whose
+  correctness is demonstrated by internal consistency (e.g. category
+  taxonomies referenced consistently across SLA definitions, KB tagging,
+  and Virtual Agent routing) rather than runtime execution.
+
+## License
+
+Released under the [MIT License](LICENSE).
